@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build my1907_opz
+name: Build 1907_orangepizero
 
 on:
   repository_dispatch:
@@ -22,10 +22,10 @@ on:
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
   REPO_BRANCH: master
-  FEEDS_CONF: my1907/feeds.conf.default
-  CONFIG_FILE: my1907/orangepizero.config
-  DIY_P1_SH: my1907/diy1.sh
-  DIY_P2_SH: my1907/diy2.sh
+  FEEDS_CONF: 1907/feeds.conf.default
+  CONFIG_FILE: 1907/orangepizero.config
+  DIY_P1_SH: 1907/diy1.sh
+  DIY_P2_SH: 1907/diy2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
