@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build lean_armv7
+name: Build lean_x86-64
 
 on:
   repository_dispatch:
@@ -23,11 +23,11 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: lean/feeds.conf.default
-  CONFIG_FILE: lean/qmenu.config
+  CONFIG_FILE: lean/x86_64.config
   DIY_P1_SH: lean/diy1.sh
   DIY_P2_SH: lean/diy2.sh
-  DOCKER_BUILD_SH: docker_armv7.sh
-  TAG: armv7
+  DOCKER_BUILD_SH: docker_amd64.sh
+  TAG: amd64
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
@@ -47,7 +47,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-       sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
         sudo -E apt-get -qq autoremove --purge
@@ -142,6 +142,7 @@ jobs:
         rm -rf packages
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
+        
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()

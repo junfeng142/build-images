@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build lean_armv7
+name: Build lean_n1
 
 on:
   repository_dispatch:
@@ -23,12 +23,13 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: lean/feeds.conf.default
-  CONFIG_FILE: lean/qmenu.config
+  CONFIG_FILE: lean/n1.config
   DIY_P1_SH: lean/diy1.sh
   DIY_P2_SH: lean/diy2.sh
-  DOCKER_BUILD_SH: docker_armv7.sh
-  TAG: armv7
-  UPLOAD_BIN_DIR: true
+  DOCKER_BUILD_SH: docker_arm64.sh
+  TAG: arm64
+  FLIPPY_NAME: 73+o
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
@@ -47,9 +48,13 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-       sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+        sudo -E apt-get -qq install rename
+        sudo -E apt-get -qq install pigz
+        sudo -E apt-get -qq install time
+        sudo -E apt-get -qq install sshpass
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         sudo timedatectl set-timezone "$TZ"
@@ -114,14 +119,14 @@ jobs:
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
-
+    
     - name: Upload bin directory
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: OpenWrt_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/bin
-
+        path: $GITHUB_WORKSPACE/openwrt/bin
+    
     - name: Build and push docker image
       id: push
       run: |
@@ -133,15 +138,26 @@ jobs:
         docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
         docker push ${{ secrets.DOCKER_USERNAME }}/openwrt:$TAG
         echo "::set-output name=status::success"
+    
+    - name: Package firmware for OpenWrt
+      id: build
+      run: |
+        sudo chmod -R 777 /opt
+        sudo cp -r $GITHUB_WORKSPACE/openwrt/N1HK1dabao/${FLIPPY_NAME}/opt/* /opt
+        cd /opt/openwrt_packit
+        sudo cp -r $GITHUB_WORKSPACE/openwrt/bin/targets/*/*/*.tar.gz ./
+        sudo chmod +x *.sh
+        sudo ./mk_s905d_n1.sh
 
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
-        rm -rf packages
+        cd /opt/openwrt_packit/output
+        pigz -6 -p $(nproc) *.img
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "::set-output name=status::success"
+        
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
