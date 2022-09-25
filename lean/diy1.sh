@@ -40,4 +40,4 @@ sed -i '/shadow/s/^/#/g' package/lean/default-settings/files/zzz-default-setting
 git clone https://github.com/Netflixxp/N1HK1dabao.git N1HK1dabao
 
 # add kernel4.4
-patch -p1 <  package/own/patches/add_kernel.patch
+patch -p1 < package/own/patches/add_kernel.patch
