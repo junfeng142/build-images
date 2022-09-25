@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build stable_jdcv1
+name: Build immortalwrt_jdcv1
 
 on:
   repository_dispatch:
