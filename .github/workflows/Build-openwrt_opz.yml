@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build immortalwrt_hc5761
+name: Build openwrt_opz
 
 on:
   repository_dispatch:
@@ -21,11 +21,11 @@ on:
 
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: immortalwrt
-  FEEDS_CONF: immortalwrt/feeds.conf.default
-  CONFIG_FILE: immortalwrt/hc5761.config
-  DIY_P1_SH: immortalwrt/diy1.sh
-  DIY_P2_SH: immortalwrt/diy2.sh
+  REPO_BRANCH: master
+  FEEDS_CONF: openwrt/feeds.conf.default
+  CONFIG_FILE: openwrt/orangepizero.config
+  DIY_P1_SH: openwrt/diy1.sh
+  DIY_P2_SH: openwrt/diy2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false

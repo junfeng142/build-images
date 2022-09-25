@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build immortalwrt_hc5761
+name: Build stable_wr841nv11
 
 on:
   repository_dispatch:
@@ -21,11 +21,11 @@ on:
 
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: immortalwrt
-  FEEDS_CONF: immortalwrt/feeds.conf.default
-  CONFIG_FILE: immortalwrt/hc5761.config
-  DIY_P1_SH: immortalwrt/diy1.sh
-  DIY_P2_SH: immortalwrt/diy2.sh
+  REPO_BRANCH: stable
+  FEEDS_CONF: stable/feeds.conf.default
+  CONFIG_FILE: stable/wr841n.config
+  DIY_P1_SH: stable/diy1.sh
+  DIY_P2_SH: stable/diy2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
