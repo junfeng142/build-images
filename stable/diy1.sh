@@ -32,11 +32,10 @@ git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
 #sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
 
 # fit mypackages
-#patch -p1 <  package/own/patches/fit-for-mac80211.patch
+patch -p1 < package/own/patches/fit-for-mac80211.patch
 patch -p1 < package/own/patches/add-sfe-flowoffload-for-stable.patch
 
 # add cputemp/wifi/usb for orangepizero
-patch -p1 < package/own/patches/fit-for-mac80211.patch
 patch -p1 < package/own/patches/add-patch_dts_file-wifi-xradio.patch
 patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
 patch -p1 < package/own/patches/add-patch_sun8i-spi0flash_16M-usb2-usb3-uart1-uart2.patch
