@@ -44,4 +44,4 @@ patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
 patch -p1 < package/own/patches/add-patch_sun8i-spi0flash_16M-usb2-usb3-uart1-uart2.patch
 
 # add kernel4.4 for arm32
-patch -p1 < package/own/patches/add_kernel4.4_for_arm32.patch
+#patch -p1 < package/own/patches/add_kernel4.4_for_arm32.patch
