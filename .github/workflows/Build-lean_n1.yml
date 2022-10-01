@@ -28,7 +28,7 @@ env:
   DIY_P2_SH: lean/diy2.sh
   DOCKER_BUILD_SH: docker_arm64.sh
   TAG: arm64
-  FLIPPY_NAME: 73+o
+  FLIPPY_NAME: 76+o
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
