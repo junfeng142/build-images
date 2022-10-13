@@ -18,10 +18,10 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone helloworld
-git clone https://github.com/fw876/helloworld.git package/helloworld
+#git clone https://github.com/fw876/helloworld.git package/helloworld
 
 # clone bypass
-#git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
+git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 
 # clone clash
 #git clone -b test https://github.com/frainzy1477/luci-app-clash.git package/own/luci-app-clash
