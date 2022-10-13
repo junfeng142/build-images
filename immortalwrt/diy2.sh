@@ -27,5 +27,6 @@ sed -i 's/services/nas/g' feeds/luci/applications/luci-app-ksmbd/root/usr/share/
 sed -i 's/system/services/g' feeds/luci/applications/luci-app-cpufreq/root/usr/share/luci/menu.d/luci-app-cpufreq.json
 sed -i 's/Turbo ACC 网络加速/网络加速/g' feeds/luci/applications/luci-app-turboacc/po/zh_Hans/turboacc.po
 
-# patch packages
+# add patches
 patch -p1 < package/own/patches/patch_for_immortalwrt_packages.patch
+patch -p1 < add_xradio_for_immortalwrt.patch
