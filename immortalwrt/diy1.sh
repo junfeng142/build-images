@@ -33,5 +33,5 @@ sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr
 # Uncomment password
 sed -i '/shadow/s/^/#/g' package/emortal/default-settings/files/99-default-settings
 
-# patch mac80211 for xradio
-patch -p1 < package/own/patches/patch_for_immortalwrt_mac80211.patch
+# add usbpower for hc5761
+patch -p1 < package/own/patches/fit_usb_dts_for_hc5761.patch
