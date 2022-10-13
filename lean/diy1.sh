@@ -22,6 +22,7 @@ git clone https://github.com/junfeng142/packages.git package/own
 
 # clone bypass
 git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
+patch -p1 < package/own/patches/add-Hans-for-bypass.patch
 
 # clone clash
 #git clone -b test https://github.com/frainzy1477/luci-app-clash.git package/own/luci-app-clash
