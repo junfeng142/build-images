@@ -23,7 +23,7 @@ env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
   REPO_BRANCH: stable
   FEEDS_CONF: stable/feeds.conf.new
-  CONFIG_FILE: stable/wr619ac.config
+  CONFIG_FILE: stable/r619ac.config
   DIY_P1_SH: stable/diy1.sh
   DIY_P2_SH: stable/diy2.sh
   UPLOAD_BIN_DIR: false
