@@ -38,7 +38,7 @@ sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr
 patch -p1 < package/own/patches/add-sfe-flowoffload-for-stable.patch
 
 # add cputemp/wifi/usb for orangepizero
-patch -p1 < package/own/patches/fit-for-mac80211.patch
+#patch -p1 < package/own/patches/fit-for-mac80211.patch
 patch -p1 < package/own/patches/add-patch_dts_file-wifi-xradio.patch
 patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
 patch -p1 < package/own/patches/add-patch_sun8i-spi0flash_16M-usb2-usb3-uart1-uart2.patch
