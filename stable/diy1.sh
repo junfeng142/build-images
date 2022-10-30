@@ -29,7 +29,7 @@ git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
 git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
 
 # Modify image size
-#sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
+sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
 
 # usbphy mac
 sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr=f8:dc:7a:5e:32:01/g' package/boot/uboot-sunxi/uEnv-default.txt
