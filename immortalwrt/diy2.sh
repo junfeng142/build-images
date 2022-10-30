@@ -29,4 +29,4 @@ sed -i 's/Turbo ACC 网络加速/网络加速/g' feeds/luci/applications/luci-ap
 
 # add patches
 patch -p1 < package/own/patches/patch_for_immortalwrt_packages.patch
-patch -p1 < package/own/patches/add_xradio_for_immortalwrt.patch
+#patch -p1 < package/own/patches/add_xradio_for_immortalwrt.patch
