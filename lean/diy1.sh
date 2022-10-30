@@ -35,7 +35,7 @@ git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
 sed -i '/shadow/s/^/#/g' package/lean/default-settings/files/zzz-default-settings
 
 # clone luci-app-amlogic
-#git clone https://github.com/ophub/luci-app-amlogic.git package/own/luci-app-amlogic
+git clone https://github.com/ophub/luci-app-amlogic.git package/own/luci-app-amlogic
 
 # clone N1HK1dabao
 git clone https://github.com/Netflixxp/N1HK1dabao.git N1HK1dabao
