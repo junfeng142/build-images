@@ -24,9 +24,6 @@ git clone https://github.com/fw876/helloworld.git package/helloworld
 #git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 #patch -p1 < package/own/patches/add-Hans-for-bypass.patch
 
-# clone clash
-#git clone -b test https://github.com/frainzy1477/luci-app-clash.git package/own/luci-app-clash
-
 # clone aliyun
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
 git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
