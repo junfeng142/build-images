@@ -21,11 +21,9 @@ git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 patch -p1 < package/own/patches/add-Hans-for-bypass.patch
 
 # clone passwall
-#git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-#git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
+git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone aliyun
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
 git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
-
-
