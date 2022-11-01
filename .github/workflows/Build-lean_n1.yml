@@ -27,7 +27,7 @@ env:
   DIY_P1_SH: lean/diy1.sh
   DIY_P2_SH: lean/diy2.sh
   FLIPPY_NAME: 77+o
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
