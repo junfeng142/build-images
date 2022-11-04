@@ -41,6 +41,7 @@ sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr
 
 # add sfe-flowoffload
 patch -p1 < package/own/patches/add-sfe-flowoffload-for-stable.patch
+chmod +x package/own/luci-app-flowoffload/root/etc/init.d/flowoffload && chmod +x package/own/luci-app-flowoffload/root/etc/uci-defaults/flowoffload
 
 # add cputemp/wifi/usb for orangepizero
 #patch -p1 < package/own/patches/fit-for-mac80211.patch
