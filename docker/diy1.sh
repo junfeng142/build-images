@@ -21,9 +21,12 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone helloworld
-git clone https://github.com/fw876/helloworld.git package/helloworld
-patch -p1 < package/own/patches/add-packages-for-helloworld.patch
-sed -i '/PACKAGE_libustream/d' package/helloworld/luci-app-ssr-plus/Makefile
+#git clone https://github.com/fw876/helloworld.git package/helloworld
+#patch -p1 < package/own/patches/add-packages-for-helloworld.patch
+#sed -i '/PACKAGE_libustream/d' package/helloworld/luci-app-ssr-plus/Makefile
+
+# clone clash
+git clone https://github.com/frainzy1477/luci-app-clash.git package/my/luci-app-clash
 
 # clone bypass
 #git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
