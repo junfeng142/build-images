@@ -23,7 +23,7 @@ env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
   REPO_BRANCH: master
   FEEDS_CONF: docker/feeds.conf.default
-  CONFIG_FILE: docker/x86-64.config
+  CONFIG_FILE: docker/x86_64.config
   DIY_P1_SH: docker/diy1.sh
   DIY_P2_SH: docker/diy2.sh
   DOCKER_BUILD_SH: docker_x86-64.sh
@@ -124,7 +124,7 @@ jobs:
       id: push
       run: |
         cd $GITHUB_WORKSPACE/docker/docker
-        sudo cp -r $GITHUB_WORKSPACE/openwrt/bin/targets/*/*.tar.gz ./
+        sudo cp -r $GITHUB_WORKSPACE/openwrt/bin/targets/*/*/*.tar.gz ./
         chmod +x $DOCKER_BUILD_SH
         ./$DOCKER_BUILD_SH
         gzip -dc dockerimgs/docker/*.gz | docker load
