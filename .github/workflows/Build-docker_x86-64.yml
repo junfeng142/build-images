@@ -124,7 +124,7 @@ jobs:
       id: push
       run: |
         cd $GITHUB_WORKSPACE/docker/docker
-        sudo cp -r $GITHUB_WORKSPACE/openwrt/bin/targets/*/*/*.tar.gz ./
+        sudo cp -r $GITHUB_WORKSPACE/openwrt/bin/targets/*/*.tar.gz ./
         chmod +x $DOCKER_BUILD_SH
         ./$DOCKER_BUILD_SH
         gzip -dc dockerimgs/docker/*.gz | docker load
