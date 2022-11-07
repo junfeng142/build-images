@@ -21,7 +21,7 @@ rm -rf feeds/packages/lang/golang && mv package/my/golang feeds/packages/lang/
 
 # fix dhcp/kvr and cgi-io
 patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
-patch -p1 < package/own/patches/add-backup-for-luci19_cgi-io.patch
+#patch -p1 < package/own/patches/add-backup-for-luci19_cgi-io.patch
 
 # add cpu_temp for luci19.07
 #sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon0\/temp1_input/g' package/own/patches/add-cputemp_for_arm_luci19.patch
