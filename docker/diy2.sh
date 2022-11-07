@@ -16,9 +16,6 @@ sed -i 's/192.168.1.1/192.168.0.5/g' package/base-files/files/bin/config_generat
 # add upx
 mv ./upx ./staging_dir/host/bin && chmod +x ./staging_dir/host/bin/upx
 
-# golang
-rm -rf feeds/packages/lang/golang && mv package/my/golang feeds/packages/lang/
-
 # fix dhcp/kvr and cgi-io
 patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
 #patch -p1 < package/own/patches/add-backup-for-luci19_cgi-io.patch
@@ -39,3 +36,7 @@ sed -i 's/services/nas/g' package/aliyunwebd/openwrt/luci-app-aliyundrive-webdav
 sed -i 's/\"services\"/\"nas\"/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/controller/aliyundrive-fuse.lua
 sed -i 's/services/nas/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/aliyundrive-fuse_log.htm
 sed -i 's/services/nas/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/aliyundrive-fuse_status.htm
+
+# golang
+rm -rf feeds/packages/lang/golang && mv package/my/golang feeds/packages/lang/
+./scripts/feeds install -a
