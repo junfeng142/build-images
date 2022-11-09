@@ -24,6 +24,9 @@ patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
 #sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon0\/temp1_input/g' package/own/patches/add-cputemp_for_arm_luci19.patch
 patch -p1 < package/own/patches/add-cputemp_for_arm_luci19.patch
 
+# golang
+patch -p1 < package/own/patches/patch-golang-for-openwrt.patch
+
 # Modify
 sed -i 's/\"services\"/\"system\"/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
 sed -i 's#("ttyd")#("ttyd"), 10#g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
@@ -36,7 +39,3 @@ sed -i 's/services/nas/g' package/aliyunwebd/openwrt/luci-app-aliyundrive-webdav
 sed -i 's/\"services\"/\"nas\"/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/controller/aliyundrive-fuse.lua
 sed -i 's/services/nas/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/aliyundrive-fuse_log.htm
 sed -i 's/services/nas/g' package/aliyunfuse/openwrt/luci-app-aliyundrive-fuse/luasrc/view/aliyundrive-fuse/aliyundrive-fuse_status.htm
-
-# golang
-rm -rf feeds/packages/lang/golang && mv package/my/golang feeds/packages/lang/
-./scripts/feeds install -a
