@@ -27,7 +27,6 @@ git clone https://github.com/junfeng142/packages.git package/own
 # clone bypass
 git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
 patch -p1 < package/own/patches/add-packages-for-bypass.patch
-sed -i 's/718/687/g' package/own/shadowsocksr-libev/patches/101-Fix-Werror-sizeof-pointer-memaccess.patch
 patch -p1 < package/own/patches/add-Hans-for-bypass.patch
 
 # clone aliyun
