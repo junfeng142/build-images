@@ -17,17 +17,17 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 
 # clone passwall
-#git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-#git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
+git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone helloworld
 #git clone https://github.com/fw876/helloworld.git package/helloworld
 #patch -p1 < package/own/patches/add-packages-for-helloworld.patch
 
 # clone bypass
-git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
-patch -p1 < package/own/patches/add-depends-for-bypass.patch
-patch -p1 < package/own/patches/add-Hans-for-bypass.patch
+#git clone https://github.com/kiddin9/openwrt-bypass.git package/bypass
+#patch -p1 < package/own/patches/add-depends-for-bypass.patch
+#patch -p1 < package/own/patches/add-Hans-for-bypass.patch
 
 # clone aliyun
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
