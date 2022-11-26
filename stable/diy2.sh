@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.0.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
 
 # add upx
 mv ./upx ./staging_dir/host/bin && chmod +x ./staging_dir/host/bin/upx
@@ -21,7 +21,7 @@ patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
 patch -p1 < package/own/patches/add-backup-for-luci19_cgi-io.patch
 
 # add cpu_temp for luci19.07
-#sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon0\/temp1_input/g' package/own/patches/add-cputemp_for_arm_luci19.patch
+sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon0\/temp1_input/g' package/own/patches/add-cputemp_for_arm_luci19.patch
 patch -p1 < package/own/patches/add-cputemp_for_arm_luci19.patch
 
 # Modify
