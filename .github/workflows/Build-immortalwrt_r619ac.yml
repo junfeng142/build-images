@@ -20,8 +20,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: immortalwrt
+  REPO_URL: https://github.com/immortalwrt/immortalwrt.git
+  REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: immortalwrt/feeds.conf.default
   CONFIG_FILE: immortalwrt/r619ac.config
   DIY_P1_SH: immortalwrt/diy1.sh
