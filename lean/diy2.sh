@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.31.252/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.31.100/g' package/base-files/files/bin/config_generate
 
 # Modify
 sed -i 's/\"services\"/\"nas\"/g' package/aliyunwebd/openwrt/luci-app-aliyundrive-webdav/luasrc/controller/aliyundrive-webdav.lua
