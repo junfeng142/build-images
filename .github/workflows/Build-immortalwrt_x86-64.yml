@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build immortalwrt_jdcv1
+name: Build immortalwrt_x86-64
 
 on:
   repository_dispatch:
@@ -23,7 +23,7 @@ env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt.git
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: immortalwrt/feeds.conf.default
-  CONFIG_FILE: immortalwrt/jdcv1.config
+  CONFIG_FILE: immortalwrt/x86_64.config
   DIY_P1_SH: immortalwrt/diy1.sh
   DIY_P2_SH: immortalwrt/diy2.sh
   UPLOAD_BIN_DIR: true
