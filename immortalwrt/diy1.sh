@@ -13,9 +13,6 @@
 # clone own
 git clone https://github.com/junfeng142/packages.git package/own
 
-# clone helloworld
-#git clone https://github.com/fw876/helloworld.git package/helloworld
-
 # clone bypass
 git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
