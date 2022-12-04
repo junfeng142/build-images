@@ -21,8 +21,8 @@ git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/
 git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone helloworld
-#git clone https://github.com/fw876/helloworld.git package/helloworld
-#patch -p1 < package/own/patches/add-packages-for-helloworld.patch
+git clone https://github.com/fw876/helloworld.git package/helloworld
+patch -p1 < package/own/patches/add-packages-for-helloworld.patch
 
 # clone aliyun
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
