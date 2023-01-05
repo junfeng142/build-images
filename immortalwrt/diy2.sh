@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.1.8/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.31.100/g' package/base-files/files/bin/config_generate
 
 # Modify
 sed -i 's/\"services\"/\"nas\"/g' package/aliyunwebd/openwrt/luci-app-aliyundrive-webdav/luasrc/controller/aliyundrive-webdav.lua
@@ -28,5 +28,5 @@ sed -i 's/system/services/g' feeds/luci/applications/luci-app-cpufreq/root/usr/s
 sed -i 's/Turbo ACC 网络加速/网络加速/g' feeds/luci/applications/luci-app-turboacc/po/zh_Hans/turboacc.po
 
 # add patches
-patch -p1 < package/own/patches/patch_for_immortalwrt_packages.patch
+#patch -p1 < package/own/patches/patch_for_immortalwrt_packages.patch
 patch -p1 < package/own/patches/add_xradio_for_immortalwrt.patch
