@@ -26,7 +26,7 @@ env:
   CONFIG_FILE: stable/r619ac.config
   DIY_P1_SH: stable/diy1.sh
   DIY_P2_SH: stable/diy2.sh
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
