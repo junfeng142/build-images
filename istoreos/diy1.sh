@@ -11,7 +11,7 @@
 #
 
 # clone own
-#git clone https://github.com/junfeng142/packages.git package/own
+git clone https://github.com/junfeng142/packages.git package/own
 
 # clone passwall
 git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
