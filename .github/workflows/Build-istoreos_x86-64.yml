@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/istoreos/istoreos.git
-  REPO_BRANCH: main
+  REPO_BRANCH: istoreos-21.02.2
   FEEDS_CONF: istoreos/feeds.conf.default
   CONFIG_FILE: istoreos/x86_64.config
   DIY_P1_SH: istoreos/diy1.sh
