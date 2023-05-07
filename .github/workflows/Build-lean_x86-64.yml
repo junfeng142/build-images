@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build istoreos_x86-64
+name: Build lean_x86-64
 
 on:
   repository_dispatch:
@@ -20,12 +20,12 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/istoreos/istoreos.git
-  REPO_BRANCH: main
-  FEEDS_CONF: istoreos/feeds.conf.default
-  CONFIG_FILE: istoreos/x86_64.config
-  DIY_P1_SH: istoreos/diy1.sh
-  DIY_P2_SH: istoreos/diy2.sh
+  REPO_URL: https://github.com/coolsnowwolf/lede.git
+  REPO_BRANCH: master
+  FEEDS_CONF: lean/feeds.conf.default
+  CONFIG_FILE: lean/x86_64.config
+  DIY_P1_SH: lean/diy1.sh
+  DIY_P2_SH: lean/diy2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false

@@ -20,18 +20,14 @@ git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/pass
 # clone helloworld
 #git clone https://github.com/fw876/helloworld.git package/helloworld
 
-# clone aliyun
-#git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
-#git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
-
 # Uncomment password
-#sed -i '/shadow/s/^/#/g' package/lean/default-settings/files/zzz-default-settings
+sed -i '/shadow/s/^/#/g' package/lean/default-settings/files/zzz-default-settings
 
 # clone luci-app-amlogic
-#git clone https://github.com/ophub/luci-app-amlogic.git package/own/luci-app-amlogic
+git clone https://github.com/ophub/luci-app-amlogic.git package/own/luci-app-amlogic
 
 # clone N1HK1dabao
-#git clone https://github.com/Netflixxp/N1HK1dabao.git N1HK1dabao
+git clone https://github.com/Netflixxp/N1HK1dabao.git N1HK1dabao
 
 # kernel version
 #sed -i 's/5.15/5.4/g' target/linux/x86/Makefile
