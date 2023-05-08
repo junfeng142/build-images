@@ -20,8 +20,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede.git
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/junfeng142/openwrt.git
+  REPO_BRANCH: lean
   FEEDS_CONF: lean/feeds.conf.default
   CONFIG_FILE: lean/x86_64.config
   DIY_P1_SH: lean/diy1.sh
