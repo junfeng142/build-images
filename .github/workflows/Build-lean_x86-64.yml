@@ -20,15 +20,15 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: lean
+  REPO_URL: https://github.com/coolsnowwolf/lede.git
+  REPO_BRANCH: master
   FEEDS_CONF: lean/feeds.conf.default
   CONFIG_FILE: lean/x86_64.config
   DIY_P1_SH: lean/diy1.sh
   DIY_P2_SH: lean/diy2.sh
   UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: true
-  UPLOAD_RELEASE: false
+  UPLOAD_FIRMWARE: false
+  UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
 
 jobs:
