@@ -28,9 +28,6 @@ patch -p1 < package/own/patches/add-packages-for-helloworld.patch
 git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
 git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
 
-# clone alist
-git clone https://github.com/sbwml/luci-app-alist package/alist
-
 # Modify image size
 sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
 
