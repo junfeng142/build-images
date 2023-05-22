@@ -30,4 +30,4 @@ git clone https://github.com/ophub/luci-app-amlogic.git package/own/luci-app-aml
 git clone https://github.com/Netflixxp/N1HK1dabao.git N1HK1dabao
 
 # kernel version
-#sed -i 's/5.15/5.4/g' target/linux/x86/Makefile
+sed -i 's/6.1/5.4/g' target/linux/x86/Makefile
