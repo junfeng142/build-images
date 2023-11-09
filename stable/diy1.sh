@@ -17,8 +17,8 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 
 # clone passwall
-git clone -b packages https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
+git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 
 # clone helloworld
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
