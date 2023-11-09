@@ -24,13 +24,6 @@ git clone -b luci https://github.com/xiaorouji/openwrt-passwall.git package/pass
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 patch -p1 < package/own/patches/add-packages-for-helloworld.patch
 
-# clone aliyun
-git clone https://github.com/messense/aliyundrive-webdav.git package/aliyunwebd
-git clone https://github.com/messense/aliyundrive-fuse.git package/aliyunfuse
-
-# clone cups
-git clone https://github.com/sirpdboy/luci-app-cupsd.git package/luci-app-cupsd
-
 # Modify image size
 sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
 
