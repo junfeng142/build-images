@@ -22,7 +22,6 @@ git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luc
 
 # clone helloworld
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
-patch -p1 < package/own/patches/add-packages-for-helloworld.patch
 
 # Modify image size
 sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
