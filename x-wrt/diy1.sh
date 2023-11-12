@@ -19,6 +19,9 @@ git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 # clone helloworld
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 
+# clone cups
+git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
+
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/config-5.4
 
