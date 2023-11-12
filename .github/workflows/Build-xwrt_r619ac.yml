@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build immortalwrt_x86-64
+name: Build xwrt_r619ac
 
 on:
   repository_dispatch:
@@ -20,14 +20,14 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/immortalwrt/immortalwrt.git
-  REPO_BRANCH: openwrt-21.02
-  FEEDS_CONF: immortalwrt/feeds.conf.default
-  CONFIG_FILE: immortalwrt/x86_64.config
-  DIY_P1_SH: immortalwrt/diy1.sh
-  DIY_P2_SH: immortalwrt/diy2.sh
+  REPO_URL: https://github.com/junfeng142/openwrt.git
+  REPO_BRANCH: x-wrt
+  FEEDS_CONF: x-wrt/feeds.conf.default
+  CONFIG_FILE: x-wrt/r619ac.config
+  DIY_P1_SH: x-wrt/diy1.sh
+  DIY_P2_SH: x-wrt/diy2.sh
   UPLOAD_BIN_DIR: true
-  UPLOAD_FIRMWARE: true
+  UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
@@ -133,7 +133,7 @@ jobs:
       with:
         name: OpenWrt_firmware${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
+        
     - name: Generate release tag
       id: tag
       if: env.UPLOAD_RELEASE == 'true' && !cancelled()
