@@ -14,7 +14,7 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone bypass
-git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
+#git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
@@ -27,7 +27,3 @@ cat package/own/configs/sunxi-config >> target/linux/sunxi/config-5.4
 
 # usbphy mac
 sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr=f8:dc:7a:5e:32:01/g' package/boot/uboot-sunxi/uEnv-default.txt
-
-# Uncomment password
-sed -i '/shadow/s/^/#/g' package/emortal/default-settings/files/99-default-settings
-
