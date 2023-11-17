@@ -20,7 +20,7 @@ git clone https://github.com/junfeng142/packages.git package/own
 git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 
 # clone cups
-git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
+#git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
 
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
