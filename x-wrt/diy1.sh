@@ -23,12 +23,11 @@ git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
 
 # add usb_gadget kernel5.4
-#cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
+cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
 
 # usbphy mac
-#sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr=f8:dc:7a:5e:32:01/g' package/boot/uboot-sunxi/uEnv-default.txt
+sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr=f8:dc:7a:5e:32:01/g' package/boot/uboot-sunxi/uEnv-default.txt
 
 # add cputemp/wifi/usb for orangepizero
-#patch -p1 < package/own/patches/fit-for-mac80211.patch
-#patch -p1 < package/own/patches/add-patch_dts_file-wifi-xradio.patch
-#patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
+patch -p1 < package/own/patches/add-patch_dts_file-wifi-xradio.patch
+patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
