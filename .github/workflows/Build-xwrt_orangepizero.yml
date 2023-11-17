@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: x-wrt
+  REPO_BRANCH: c-wrt
   FEEDS_CONF: x-wrt/feeds.conf.default
   CONFIG_FILE: x-wrt/orangepizero.config
   DIY_P1_SH: x-wrt/diy1.sh
