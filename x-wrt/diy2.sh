@@ -22,5 +22,5 @@ sed -i 's/192.168.1.1/192.168.0.6/g' package/base-files/files/bin/config_generat
 #patch -p1 < package/own/patches/add-cputemp_for_arm_luci19.patch
 
 # Modify
-sed -i 's/\"services\"/\"system\"/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
-sed -i 's#("ttyd")#("ttyd"), 10#g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
+#sed -i 's/\"services\"/\"system\"/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
+#sed -i 's#("ttyd")#("ttyd"), 10#g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
