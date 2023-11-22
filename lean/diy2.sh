@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.0.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.0.6/g' package/base-files/files/bin/config_generate
 
 # lede
 sed -i 's/system/services/g' feeds/luci/applications/luci-app-cpufreq/luasrc/controller/cpufreq.lua
