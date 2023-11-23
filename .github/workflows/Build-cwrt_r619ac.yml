@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build xwrt_r619ac
+name: Build cwrt_r619ac
 
 on:
   repository_dispatch:
@@ -22,10 +22,10 @@ on:
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
   REPO_BRANCH: c-wrt
-  FEEDS_CONF: x-wrt/feeds.conf.default
-  CONFIG_FILE: x-wrt/r619ac.config
-  DIY_P1_SH: x-wrt/diy1.sh
-  DIY_P2_SH: x-wrt/diy2.sh
+  FEEDS_CONF: c-wrt/feeds.conf.default
+  CONFIG_FILE: c-wrt/r619ac.config
+  DIY_P1_SH: c-wrt/diy1.sh
+  DIY_P2_SH: c-wrt/diy2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: false
