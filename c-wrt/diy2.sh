@@ -15,7 +15,6 @@ sed -i 's/192.168.1.1/192.168.0.6/g' package/base-files/files/bin/config_generat
 
 # fix dhcp/kvr and cgi-io
 patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
-#patch -p1 < package/own/patches/add-backup-for-luci19_cgi-io.patch
 patch -p1 < package/own/patches/fit-for-lucihttp.patch
 
 # add cpu_temp for luci19.07
