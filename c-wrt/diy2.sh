@@ -11,7 +11,7 @@
 #
 
 # Modify default IP
-sed -i 's/192.168.1.1/192.168.1.4/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.1.2/g' package/base-files/files/bin/config_generate
 
 # fix dhcp/kvr and cgi-io
 patch -p1 < package/own/patches/add-dhcp-kvr-for-luci19.patch
