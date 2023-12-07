@@ -17,7 +17,7 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-git clone -b main https://github.com/fw876/helloworld.git package/helloworld
+git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
