@@ -14,7 +14,7 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone bypass
-#git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
+git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
 git clone -b master https://github.com/fw876/helloworld.git package/helloworld
