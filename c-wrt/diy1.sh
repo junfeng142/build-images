@@ -26,6 +26,9 @@ git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
 
+# fit forbypass
+rm -rf !(luci-app-bypass | smartdns) package/bypass
+
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
 
