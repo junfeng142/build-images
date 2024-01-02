@@ -38,4 +38,3 @@ sed -i 's/rootwait/rootwait g_ether.dev_addr=f8:dc:7a:5e:32:02 g_ether.host_addr
 
 # add cputemp/usb for orangepizero
 patch -p1 < package/own/patches/add-patch_sun8i-h3-ths.patch
-patch -p1 < package/own/patches/patch_test.patch
