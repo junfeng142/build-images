@@ -14,14 +14,14 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone bypass
-#git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
+git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-#git clone -b master https://github.com/fw876/helloworld.git package/helloworld
+git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 
 # clone passwall
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
-#git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
+git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall/luci
 
 # clone cups
