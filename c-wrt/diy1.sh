@@ -14,21 +14,21 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone bypass
-git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
+#git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-git clone -b master https://github.com/fw876/helloworld.git package/helloworld
+#git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 
 # clone passwall
-#git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
-#git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall/luci
+git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall/luci
 
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
 
 # fit for bypass
-mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
+#mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
 
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
