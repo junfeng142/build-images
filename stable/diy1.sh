@@ -16,12 +16,14 @@ git clone https://github.com/junfeng142/packages.git package/own
 # clone ssr
 #git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 
-# clone passwall
-git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
-git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
+# clone bypass
+git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-git clone -b main https://github.com/fw876/helloworld.git package/helloworld
+git clone -b master https://github.com/fw876/helloworld.git package/helloworld
+
+# fit for bypass
+mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
 
 # Modify image size
 sed -i 's/tplink-8mlzma/tplink-16mlzma/g' target/linux/ar71xx/image/tiny-tp-link.mk
