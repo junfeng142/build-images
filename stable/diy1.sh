@@ -22,6 +22,9 @@ git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 # clone helloworld
 git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 
+# clone alist
+git clone https://github.com/sbwml/luci-app-alist.git package/alist
+
 # fit for bypass
 #mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
 
