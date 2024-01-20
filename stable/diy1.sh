@@ -14,7 +14,7 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone ssr
-git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
+#git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 
 # clone bypass
 #git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
