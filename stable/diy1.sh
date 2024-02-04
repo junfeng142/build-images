@@ -14,13 +14,13 @@
 git clone https://github.com/junfeng142/packages.git package/own
 
 # clone ssr
-#git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
+git clone -b ssr https://github.com/junfeng142/packages.git package/ssr
 
 # clone bypass
 #git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-git clone -b main https://github.com/fw876/helloworld.git package/helloworld
+#git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 
 # clone alist
 git clone https://github.com/sbwml/luci-app-alist.git package/alist
