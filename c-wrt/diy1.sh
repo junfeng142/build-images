@@ -26,7 +26,7 @@ git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/pas
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall/luci
 
 rm -rf package/passwall/xray-core && rm -rf package/passwall/xray-plugin
-mv -r package/helloworld/xray-core package/passwall/xray-core && mv -r package/helloworld/xray-plugin package/passwall/xray-plugin
+mv package/helloworld/xray-core package/passwall/xray-core && mv package/helloworld/xray-plugin package/passwall/xray-plugin
 rm -rf package/helloworld
 
 # clone cups
