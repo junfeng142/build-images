@@ -20,9 +20,6 @@ patch -p1 < package/own/patches/fit-for_ddns_firewall.patch
 sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon1\/temp1_input/g' package/own/patches/add-dhcp_kvr_temp_luci21.patch
 patch -p1 < package/own/patches/add-dhcp_kvr_temp_luci21.patch
 
-# fit xray
-rm -rf package/passwall/xray-core && rm -rf package/passwall/xray-plugin
-
 # Modify
 sed -i 's/services/nas/g' feeds/luci/applications/luci-app-ksmbd/root/usr/share/luci/menu.d/luci-app-ksmbd.json
 sed -i 's/services/system/g' feeds/luci/applications/luci-app-ttyd/root/usr/share/luci/menu.d/luci-app-ttyd.json
