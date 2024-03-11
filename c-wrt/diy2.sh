@@ -20,9 +20,8 @@ patch -p1 < package/own/patches/fit-for_ddns_firewall.patch
 sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon1\/temp1_input/g' package/own/patches/add-dhcp_kvr_temp_luci21.patch
 patch -p1 < package/own/patches/add-dhcp_kvr_temp_luci21.patch
 
-# fit golang
-rm -rf feeds/packages/lang/golang
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+# fit xray
+rm -rf package/passwall/xray-core && rm -rf package/passwall/xray-plugin
 
 # Modify
 sed -i 's/services/nas/g' feeds/luci/applications/luci-app-ksmbd/root/usr/share/luci/menu.d/luci-app-ksmbd.json
