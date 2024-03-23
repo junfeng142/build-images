@@ -24,10 +24,10 @@ env:
   REPO_BRANCH: c-wrt
   FEEDS_CONF: c-wrt/feeds.conf.new
   CONFIG_FILE: c-wrt/jdcloud.config
-  DIY_P1_SH: stable/diy1.sh
-  DIY_P2_SH: stable/diy2.sh
-  UPLOAD_BIN_DIR: true
-  UPLOAD_FIRMWARE: false
+  DIY_P1_SH: c-wrt/diy1.sh
+  DIY_P2_SH: c-wrt/diy2.sh
+  UPLOAD_BIN_DIR: false
+  UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
