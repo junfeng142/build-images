@@ -15,7 +15,9 @@ sed -i 's/192.168.1.1/192.168.1.4/g' package/base-files/files/bin/config_generat
 
 # fix ddns/firewall
 patch -p1 < package/own/patches/fit-for_ddns_firewall.patch
-patch -p1 < package/own/patches/fit-for-510.patch
+
+# fix hwnat for kernel5.10
+patch -p1 < package/own/patches/fit-hwnat-for-kernel510.patch
 
 # add dhcp/kvr/temp for luci21.02
 sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon1\/temp1_input/g' package/own/patches/add-dhcp_kvr_temp_luci21.patch
