@@ -23,6 +23,7 @@ patch -p1 < package/own/patches/add-support-for-lucihttp.patch
 # add cpu_temp for luci19.07
 sed -i 's/thermal\/thermal_zone0\/temp/hwmon\/hwmon1\/temp1_input/g' package/own/patches/add-cputemp_for_arm_luci19.patch
 patch -p1 < package/own/patches/add-cputemp_for_arm_luci19.patch
+patch -p1 < package/own/patches/fit-for-510.patch
 
 # Modify
 sed -i 's/\"services\"/\"system\"/g' feeds/luci/applications/luci-app-ttyd/luasrc/controller/ttyd.lua
