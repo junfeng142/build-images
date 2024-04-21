@@ -20,8 +20,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://gitee.com/artinchip/d211.git
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/junfeng142/Demo-project.git
+  REPO_BRANCH: d211
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
@@ -50,12 +50,13 @@ jobs:
     - name: Clone source code
       working-directory: /workdir
       run: |
-        df -hT $PWD
-         git clone $REPO_URL
+         df -hT $PWD
+         git clone $REPO_URL -b $REPO_BRANCH luban_d211
+         ln -sf /workdir/luban_d211 $GITHUB_WORKSPACE/luban_d211
         
     - name: Load custom feeds
       run: |
-        cd d211
+        cd luban_d211
         sudo ./tools/scripts/oneclick.sh quiet
         
     - name: SSH connection to Actions
@@ -68,6 +69,7 @@ jobs:
     - name: Compile the firmware
       id: compile
       run: |
+        cd luban_d211
         source tools/onestep.sh
         lunch d211_demo_defconfig
         echo -e "$(nproc) thread compile"
@@ -85,7 +87,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd d211/d211/luban/output/d211_demo
+        cd luban_d211/d211/luban/output/d211_demo
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
