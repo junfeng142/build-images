@@ -51,7 +51,7 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL
+         git clone $REPO_URL -b $REPO_BRANCH Luban_SDK_Root_Directory
         
     - name: Load custom feeds
       run: |
