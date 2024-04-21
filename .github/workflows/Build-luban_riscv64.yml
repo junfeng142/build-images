@@ -23,7 +23,7 @@ env:
   REPO_URL: https://gitee.com/artinchip/d211.git
   REPO_BRANCH: master
   UPLOAD_FIRMWARE: true
-  UPLOAD_RELEASE: true
+  UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
 
 jobs:
@@ -51,11 +51,11 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-         git clone $REPO_URL -b $REPO_BRANCH Luban_SDK_Root_Directory
+         git clone $REPO_URL
         
     - name: Load custom feeds
       run: |
-        cd Luban_SDK_Root_Directory
+        cd d211
         sudo ./tools/scripts/oneclick.sh quiet
         
     - name: SSH connection to Actions
@@ -85,7 +85,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd Luban_SDK_Root_Directory/d211/luban/output/d211_demo
+        cd d211/d211/luban/output/d211_demo
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
