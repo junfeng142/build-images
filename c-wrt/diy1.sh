@@ -21,15 +21,16 @@ git clone -b master https://github.com/fw876/helloworld.git package/helloworld
 sed -i 's/ +libopenssl-legacy//g' package/helloworld/shadowsocksr-libev/Makefile
 
 # clone passwall
-#git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
-#git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall/luci
-git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall/luci
+git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
+#git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
 
-# fit for bypass
+# fit for packages
 #mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
+mv package/passwall/v2ray-core package/passwall/v2ray-geodata package/passwall/v2ray-plugin package/my && rm -rf package/passwall
 
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
