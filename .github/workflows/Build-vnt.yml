@@ -37,8 +37,6 @@ jobs:
       TARGET: ${{ matrix.TARGET }}
       OS: ${{ matrix.OS }}
       FEATURES: ${{ matrix.FEATURES }}
-      REPO_URL: https://github.com/lbl8603/vnt.git
-      REPO_BRANCH: 1.2.x
     steps:
       - uses: actions/checkout@v2
       - name: Init submodules
@@ -55,7 +53,7 @@ jobs:
         run: echo OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl >> $GITHUB_ENV
       - name: Clone source code
         run: |
-          git clone -b $REPO_BRANCH $REPO_URL vnt 
+          git clone https://github.com/lbl8603/vnt.git
           cd vnt
       - name: Install and configure dependencies
         run: |
