@@ -23,20 +23,11 @@ jobs:
   build:
     strategy:
       fail-fast: false
-      matrix:
-        # a list of all the targets
-        # 选择使用openssl或者ring，并不是所有平台都支持
-        include:
-          - TARGET: x86-pc-windows-msvc # tested on a windows machine
-            OS: windows-latest
-            FEATURES: ring-cipher,wss
-    # needs: test
-    runs-on: ${{ matrix.OS }}
+    runs-on: windows-latest
     env:
-      NAME: vnt-cli # change with the name of your project
-      TARGET: ${{ matrix.TARGET }}
-      OS: ${{ matrix.OS }}
-      FEATURES: ${{ matrix.FEATURES }}
+      NAME: vnt-cli
+      TARGET: x86-pc-windows-msvc
+      OS: windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: Init submodules
@@ -47,7 +38,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ./target
-          key: build-cargo-registry-${{matrix.TARGET}}
+          key: build-cargo-registry-x86-pc-windows-msvc
       - name: Use strawberry perl
         if: startsWith(matrix.os, 'windows')
         run: echo OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl >> $GITHUB_ENV
