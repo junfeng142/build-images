@@ -65,7 +65,9 @@ jobs:
           rustup -V
           
       - name: Run build vnt-cli
-        run: cargo build --package vnt-cli --release --verbose --target $TARGET
+        run: |
+          cd vnt
+          cargo build --package vnt-cli --release --verbose --target $TARGET
       - name: List target
         run: find ./target
       - name: Compress
