@@ -63,12 +63,6 @@ jobs:
           rustup install 1.77
           rustup default 1.77
           rustup -V
-          
-          # some additional configuration for cross-compilation on linux
-          cat >>~/.cargo/config <<EOF
-          [target.x86_64-pc-windows-msvc]
-          rustflags = ["-C", "target-feature=+crt-static","-C", "strip=symbols"]
-          EOF
       - name: Install rust target
         run: rustup target add $TARGET
       - name: Run build vn-link-cli
