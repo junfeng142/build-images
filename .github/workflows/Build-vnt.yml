@@ -64,10 +64,8 @@ jobs:
           rustup default 1.77
           rustup -V
           
-      - name: Run build vn-link-cli
-        run: cargo build --package vn-link-cli --release --verbose --target $TARGET --features $FEATURES
       - name: Run build vnt-cli
-        run: cargo build --package vnt-cli --release --verbose --target $TARGET --features $FEATURES
+        run: cargo build --package vnt-cli --release --verbose --target $TARGET
       - name: List target
         run: find ./target
       - name: Compress
