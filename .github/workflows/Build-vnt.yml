@@ -1,0 +1,101 @@
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+#
+
+name: Build vnt_for_x86
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+
+
+jobs:
+  build:
+    fail-fast: false
+      matrix:
+        # a list of all the targets
+        # 选择使用openssl或者ring，并不是所有平台都支持
+        include:
+          - TARGET: x86-pc-windows-msvc # tested on a windows machine
+            OS: windows-latest
+            FEATURES: ring-cipher,wss
+  runs-on: ${{ matrix.OS }}
+  env:
+      NAME: vnt-cli # change with the name of your project
+      TARGET: ${{ matrix.TARGET }}
+      OS: ${{ matrix.OS }}
+      FEATURES: ${{ matrix.FEATURES }}
+      REPO_URL: https://github.com/junfeng142/openwrt.git
+      REPO_BRANCH: stable
+  steps:
+      - uses: actions/checkout@v2
+      - name: Init submodules
+        uses: snickerbockers/submodules-init@v4
+      - name: Cargo cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ./target
+          key: build-cargo-registry-${{matrix.TARGET}}
+      - name: Use strawberry perl
+        if: startsWith(matrix.os, 'windows')
+        run: echo OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl >> $GITHUB_ENV
+      - name: Clone source code
+        run: git clone $REPO_URL -b $REPO_BRANCH vnt
+      - name: Install and configure dependencies
+        run: |
+          # dependencies are only needed on ubuntu as that's the only place where
+          # we make cross-compilation
+          rustup set auto-self-update disable
+          rustup install 1.77
+          rustup default 1.77
+          rustup -V
+          
+          # some additional configuration for cross-compilation on linux
+          cat >>~/.cargo/config <<EOF
+          [target.x86_64-pc-windows-msvc]
+          rustflags = ["-C", "target-feature=+crt-static","-C", "strip=symbols"]
+          EOF
+      - name: Install rust target
+        run: rustup target add $TARGET
+      - name: Run build vn-link-cli
+        run: cargo build --package vn-link-cli --release --verbose --target $TARGET --features $FEATURES
+      - name: Run build vnt-cli
+        run: cargo build --package vnt-cli --release --verbose --target $TARGET --features $FEATURES
+      - name: List target
+        run: find ./target
+      - name: Compress
+        run: |
+          mkdir -p ./artifacts
+          # windows is the only OS using a different convention for executable file name
+          EXEC_VNT_CLI=vnt-cli.exe
+          EXEC_VN_LINK_CLI=vn-link-cli.exe
+          if [[ $GITHUB_REF_TYPE =~ ^tag$ ]]; then
+            TAG=$GITHUB_REF_NAME
+          else
+            TAG=$GITHUB_SHA
+          fi
+          mv ./target/$TARGET/release/$EXEC_VNT_CLI ./artifacts/$EXEC_VNT_CLI
+          mv ./target/$TARGET/release/$EXEC_VN_LINK_CLI ./artifacts/$EXEC_VN_LINK_CLI
+          mv ./README ./artifacts/README.txt
+          cd ./artifacts
+          tar -czf vnt-$TARGET-$TAG.tar.gz *
+      - name: Archive artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: vnt-cli
+          path: |
+            ./artifacts
+      
