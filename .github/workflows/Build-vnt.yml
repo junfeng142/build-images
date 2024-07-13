@@ -54,7 +54,9 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         run: echo OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl >> $GITHUB_ENV
       - name: Clone source code
-        run: git clone $REPO_URL -b $REPO_BRANCH vnt
+        run: |
+          git clone -b $REPO_BRANCH $REPO_URL vnt 
+          cd vnt
       - name: Install and configure dependencies
         run: |
           # dependencies are only needed on ubuntu as that's the only place where
