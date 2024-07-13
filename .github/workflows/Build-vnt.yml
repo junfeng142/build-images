@@ -75,14 +75,12 @@ jobs:
           mkdir -p ./artifacts
           # windows is the only OS using a different convention for executable file name
           EXEC_VNT_CLI=vnt-cli.exe
-          EXEC_VN_LINK_CLI=vn-link-cli.exe
           if [[ $GITHUB_REF_TYPE =~ ^tag$ ]]; then
             TAG=$GITHUB_REF_NAME
           else
             TAG=$GITHUB_SHA
           fi
           mv ./target/$TARGET/release/$EXEC_VNT_CLI ./artifacts/$EXEC_VNT_CLI
-          mv ./target/$TARGET/release/$EXEC_VN_LINK_CLI ./artifacts/$EXEC_VN_LINK_CLI
           mv ./README ./artifacts/README.txt
           cd ./artifacts
           tar -czf vnt-$TARGET-$TAG.tar.gz *
