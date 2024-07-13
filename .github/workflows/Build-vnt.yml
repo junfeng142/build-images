@@ -34,7 +34,7 @@ jobs:
           path: |
             ~/.cargo/registry
             ./target
-          key: build-cargo-registry-x86-pc-windows-msvc
+          key: build-cargo-registry-i386-pc-windows-msvc
       - name: Use strawberry perl
         run: echo OPENSSL_SRC_PERL=C:/Strawberry/perl/bin/perl >> $GITHUB_ENV
       - name: Clone source code
@@ -53,7 +53,7 @@ jobs:
       - name: Run build vnt-cli
         run: |
           cd vnt
-          cargo build --package vnt-cli --release --verbose --target x86-pc-windows-msvc
+          cargo build --package vnt-cli --release --verbose --target i386-pc-windows-msvc
       - name: List target
         run: find ./target
       - name: Compress
@@ -66,10 +66,10 @@ jobs:
           else
             TAG=$GITHUB_SHA
           fi
-          mv ./target/x86-pc-windows-msvc/release/$EXEC_VNT_CLI ./artifacts/$EXEC_VNT_CLI
+          mv ./target/i386-pc-windows-msvc/release/$EXEC_VNT_CLI ./artifacts/$EXEC_VNT_CLI
           mv ./README ./artifacts/README.txt
           cd ./artifacts
-          tar -czf vnt-x86-pc-windows-msvc-$TAG.tar.gz *
+          tar -czf vnt-i386-pc-windows-msvc-$TAG.tar.gz *
       - name: Archive artifact
         uses: actions/upload-artifact@v2
         with:
