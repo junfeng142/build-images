@@ -37,8 +37,8 @@ jobs:
       TARGET: ${{ matrix.TARGET }}
       OS: ${{ matrix.OS }}
       FEATURES: ${{ matrix.FEATURES }}
-      REPO_URL: https://github.com/junfeng142/openwrt.git
-      REPO_BRANCH: stable
+      REPO_URL: https://github.com/lbl8603/vnt.git
+      REPO_BRANCH: 1.2.x
     steps:
       - uses: actions/checkout@v2
       - name: Init submodules
