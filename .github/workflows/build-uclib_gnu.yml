@@ -21,7 +21,7 @@ on:
 
 env:
   REPO_URL: https://github.com/bittboy/buildroot
-  REPO_BRANCH: master
+  REPO_BRANCH: bittboy_new_2020
   CONFIG_FILE: uclgnu/uclgnu.config
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
@@ -80,7 +80,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: uc_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: uclib_host_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: uclibgnu/output/host
 
     - name: Organize files
@@ -95,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: uc_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: uclib_gnu_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
         
     - name: Generate release tag
