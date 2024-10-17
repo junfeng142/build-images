@@ -81,13 +81,13 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: uc_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: uclibgnu/output/images
+        path: uclibgnu/output/host
 
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd output/host
+        cd output/images
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
