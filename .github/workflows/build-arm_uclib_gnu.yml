@@ -22,8 +22,8 @@ on:
 env:
   REPO_URL: https://github.com/bittboy/buildroot
   REPO_BRANCH: master
-  CONFIG_FILE: uc/uc.config
-  UPLOAD_BIN_DIR: false
+  CONFIG_FILE: uclgnu/uclgnu.config
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
   TZ: Asia/Shanghai
