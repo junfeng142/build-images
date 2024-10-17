@@ -53,28 +53,20 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        git clone $REPO_URL -b $REPO_BRANCH uclibgnu
+        ln -sf /workdir/uclibgnu $GITHUB_WORKSPACE/uclibgnu
 
     - name: Load custom configuration
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-
-    - name: Download package
-      id: package
-      run: |
-        cd openwrt
-        make defconfig
-        make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE uclibgnu/.config
         
     - name: Compile the firmware
       id: compile
       run: |
-        cd openwrt
+        cd uclibgnu
+        make defconfig
         echo -e "$(nproc) thread compile"
-        make -j$(nproc) || make -j1 || make -j1 V=s
+        make sdk -j$(nproc) || make sdk -j1 || make sdk -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
@@ -89,7 +81,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: uc_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/output/images
+        path: uclibgnu/output/images
 
     - name: Organize files
       id: organize
