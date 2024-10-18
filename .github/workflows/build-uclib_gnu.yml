@@ -21,8 +21,8 @@ on:
 
 env:
   REPO_URL: https://github.com/bittboy/buildroot
-  REPO_BRANCH: bittboy_new_2020
-  CONFIG_FILE: uclgnu/uclgnu.config
+  REPO_BRANCH: master
+  CONFIG_FILE: uclgnu/master.config
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
