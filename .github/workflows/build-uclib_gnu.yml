@@ -80,13 +80,13 @@ jobs:
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: uclib_gnu_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: uclibgnu/output/host
+        path: uclibgnu/output/build/linux-headers-*
 
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd uclibgnu/output/build/linux-headers-4.14.99
+        cd uclibgnu/output/images
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
