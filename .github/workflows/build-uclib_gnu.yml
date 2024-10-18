@@ -79,14 +79,14 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: uclib_host_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: uclib_gnu_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: uclibgnu/output/host
 
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd uclibgnu/output/images
+        cd uclibgnu/output/build/linux-headers-4.14.139
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
         
@@ -94,7 +94,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: uclib_gnu_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: uclib_linux_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
         
     - name: Generate release tag
