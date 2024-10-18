@@ -64,7 +64,6 @@ jobs:
       id: compile
       run: |
         cd uclibgnu
-        make defconfig
         echo -e "$(nproc) thread compile"
         make sdk -j$(nproc) || make sdk -j1 || make sdk -j1 V=s
         echo "status=success" >> $GITHUB_OUTPUT
