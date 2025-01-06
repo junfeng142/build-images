@@ -24,8 +24,8 @@ env:
   REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: c-wrt/feeds.conf.ipq50xx
   CONFIG_FILE: c-wrt/rax3000q.config
-  DIY_P1_SH: c-wrt/diy11.sh
-  DIY_P2_SH: c-wrt/diy22.sh
+  DIY_P1_SH: c-wrt/diy-part1.sh
+  DIY_P2_SH: c-wrt/diy-part2.sh
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: false
