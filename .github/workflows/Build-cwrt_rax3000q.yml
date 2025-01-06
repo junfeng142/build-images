@@ -20,8 +20,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: c-wrt
+  REPO_URL: https://github.com/kkstone/immortalwrt-ipq50xx
+  REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: c-wrt/feeds.conf.ipq50xx
   CONFIG_FILE: c-wrt/rax3000q.config
   DIY_P1_SH: c-wrt/diy1.sh
