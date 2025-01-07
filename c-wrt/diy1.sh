@@ -32,9 +32,6 @@ git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 #mv package/bypass/luci-app-bypass package/bypass/smartdns package/bypass/lua-maxminddb package/bypass/trojan-plus package/my && rm -rf package/bypass
 mv package/passwall/v2ray-core package/passwall/v2ray-geodata package/passwall/v2ray-plugin package/my && rm -rf package/passwall
 
-# fix build for ipq50xx
-patch -p1 < package/own/patches/fit-for-ipq50xx.patch
-
 # add usb_gadget kernel5.4
 cat package/own/configs/sunxi-config >> target/linux/sunxi/cortexa7/config-5.4
 
