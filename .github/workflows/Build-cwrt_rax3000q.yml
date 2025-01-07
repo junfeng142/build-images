@@ -20,8 +20,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: c-wrt
+  REPO_URL: https://github.com/kkstone/immortalwrt-ipq50xx
+  REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: c-wrt/feeds.conf.default
   CONFIG_FILE: c-wrt/rax3000q.config
   DIY_P1_SH: c-wrt/diy1.sh
@@ -72,6 +72,25 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: Upgrade some network software version
+      run: |
+        cd openwrt
+
+        rm -rf feeds/packages/net/natmap
+        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
+        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
+        rm -rf cdn.jsdelivr.net
+        find feeds/packages/net/natmap -name index.html -exec rm {} \;
+
+    - name: Fix golang version
+      run: |
+        cd openwrt
+        rm -rf feeds/packages/lang/golang
+        git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+
+    - name: Install feeds
+      run: cd openwrt && ./scripts/feeds install -a
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -86,6 +105,13 @@ jobs:
       env:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
+    - name: Fix some download failed first
+      run: |
+        cd openwrt
+        mkdir dl
+        wget "https://www.dropbox.com/scl/fi/9ts30p2csnlb9imaf8k68/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz?rlkey=sntbyfjgg86gu2uoocgb9ggp1&st=7w81hl56&dl=1" -O dl/backports-20210222-5.4-qsdk-11.5.0.5.tar.xz
+        wget "https://www.dropbox.com/scl/fi/gu7ge6jmefn72ttuop1zs/linux-5.4-qsdk-11.5.0.5.tar.xz?rlkey=tdpq0ye35x290frbh7i8uqrm8&st=jjvegqrr&dl=1" -O dl/linux-5.4-qsdk-11.5.0.5.tar.xz
 
     - name: Download package
       id: package
