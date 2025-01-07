@@ -20,6 +20,24 @@ cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages
 rm -rf cdn.jsdelivr.net
 find feeds/packages/net/natmap -name index.html -exec rm {} \;
 
+rm -rf feeds/packages/net/smartdns
+wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns/
+cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/smartdns feeds/packages/net/smartdns/
+rm -rf cdn.jsdelivr.net
+find feeds/packages/net/smartdns -name index.html -exec rm {} \;
+
+rm -rf feeds/packages/net/ddns-go
+wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go/
+cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/ddns-go feeds/packages/net/ddns-go/
+rm -rf cdn.jsdelivr.net
+find feeds/packages/net/ddns-go -name index.html -exec rm {} \;    
+
+rm -rf feeds/packages/net/frp
+wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp/
+cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/frp feeds/packages/net/frp/
+rm -rf cdn.jsdelivr.net
+find feeds/packages/net/frp -name index.html -exec rm {} \; 
+
 wget "https://www.dropbox.com/scl/fi/uccikbibj772c4sekzbk7/luci-app-turboacc.zip?rlkey=yzhkk0lfzhrthn8hbl1qt8k5j&st=31820445&dl=1" -O luci-app-turboacc.zip
 rm -rf feeds/luci/applications/luci-app-turboacc
 unzip luci-app-turboacc.zip -d feeds/luci/applications/
