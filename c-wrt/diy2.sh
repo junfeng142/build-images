@@ -10,9 +10,15 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
+rm -rf feeds/packages/net/natmap
+wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
+cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
+rm -rf cdn.jsdelivr.net
+find feeds/packages/net/natmap -name index.html -exec rm {} \;
+
 #Fix golang version
-#rm -rf feeds/packages/lang/golang
-#git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.1.4/g' package/base-files/files/bin/config_generate
