@@ -72,25 +72,6 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Upgrade some network software version
-      run: |
-        cd openwrt
-
-        rm -rf feeds/packages/net/natmap
-        wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
-        cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
-        rm -rf cdn.jsdelivr.net
-        find feeds/packages/net/natmap -name index.html -exec rm {} \;
-
-    - name: Fix golang version
-      run: |
-        cd openwrt
-        rm -rf feeds/packages/lang/golang
-        git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
-
-    - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
-
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
