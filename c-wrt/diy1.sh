@@ -17,13 +17,13 @@ git clone https://github.com/junfeng142/packages.git package/own
 #git clone -b bypass https://github.com/junfeng142/packages.git package/bypass
 
 # clone helloworld
-git clone -b master https://github.com/fw876/helloworld.git package/helloworld
-sed -i 's/ +libopenssl-legacy//g' package/helloworld/shadowsocksr-libev/Makefile
+#git clone -b master https://github.com/fw876/helloworld.git package/helloworld
+#sed -i 's/ +libopenssl-legacy//g' package/helloworld/shadowsocksr-libev/Makefile
 
 # clone passwall
-git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
+#git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
-git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
+#git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
