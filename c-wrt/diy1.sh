@@ -21,7 +21,6 @@ git clone -b main https://github.com/fw876/helloworld.git package/helloworld
 sed -i 's/ +libopenssl-legacy//g' package/helloworld/shadowsocksr-libev/Makefile
 
 # clone passwall
-rm -rf ../feeds/packages/net/{chinadns*,hysteria,geoview,trojan*,xray*,v2ray*,sing*}
 git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall
 #git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
