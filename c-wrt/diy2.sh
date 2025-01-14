@@ -9,14 +9,17 @@
 # File name: diy-part2.sh
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
+# fix immortalwrt passwall2
+rm -rf ../feeds/packages/net/{chinadns*,hysteria,geoview,trojan*,xray*,v2ray*,sing*}
 
+# # fix natmap version
 rm -rf feeds/packages/net/natmap
 wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
 cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
 rm -rf cdn.jsdelivr.net
 find feeds/packages/net/natmap -name index.html -exec rm {} \;
 
-#Fix golang version
+# fix golang version
 rm -rf feeds/packages/lang/golang
 git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 
