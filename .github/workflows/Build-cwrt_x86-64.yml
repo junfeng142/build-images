@@ -22,7 +22,7 @@ on:
 env:
   REPO_URL: https://github.com/junfeng142/openwrt.git
   REPO_BRANCH: c-wrt
-  FEEDS_CONF: c-wrt/feeds.conf.X86_64
+  FEEDS_CONF: c-wrt/feeds.conf.x86_64
   CONFIG_FILE: c-wrt/x86_64.config
   DIY_P1_SH: c-wrt/diy1.sh
   DIY_P2_SH: c-wrt/diy2.sh
