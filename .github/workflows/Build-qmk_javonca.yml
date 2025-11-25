@@ -50,6 +50,7 @@ jobs:
       working-directory: ./qmk_firmware
       run: |
         qmk compile -kb javonca/$QMK_CONFIG -km default
+        echo "status=success" >> $GITHUB_OUTPUT
         
     - name: Check space usage
       if: (!cancelled())
