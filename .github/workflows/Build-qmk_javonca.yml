@@ -1,0 +1,76 @@
+
+
+name: Build qmk_javonca
+
+env:
+  REPO_URL: https://github.com/junfeng142/openwrt.git
+  REPO_BRANCH: c-wrt
+  QMK_CONFIG: methane
+  UPLOAD_BIN_DIR: true
+  UPLOAD_RELEASE: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: qmkfm/qmk_cli
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Set Up QMK
+      working-directory: ./qmk_firmware
+      run: |
+        qmk setup -y
+        
+    - name: Copy keymap
+      run: |
+        mkdir -p qmk_firmware/keyboards/
+        cp -rup ./qmk/* ./qmk_firmware/keyboards/
+        
+    - name: Compile Custom Firmware
+      working-directory: ./qmk_firmware
+      run: |
+        qmk compile -kb javonca/$QMK_CONFIG -km default
+        
+    - name: Check space usage
+      if: (!cancelled())
+      run: df -hT
+
+    - name: Upload bin directory
+      uses: actions/upload-artifact@main
+      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: Firmware Files
+        path: |
+          ./qmk_firmware/*.hex
+          ./qmk_firmware/*.bin
+        
+    - name: Generate release tag
+      id: tag
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      run: |
+        echo "release_tag=$(date +"%Y.%m.%d-%H%M")" >> $GITHUB_OUTPUT
+        touch release.txt
+        echo "status=success" >> $GITHUB_OUTPUT
+        
+    - name: Upload firmware to release
+      uses: softprops/action-gh-release@v1
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: release.txt
+        files: |
+          ./qmk_firmware/*.hex
+          ./qmk_firmware/*.bin
+
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.1.0
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+        keep_latest: 3
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
