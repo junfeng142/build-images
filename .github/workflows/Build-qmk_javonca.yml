@@ -10,8 +10,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/junfeng142/openwrt.git
-  REPO_BRANCH: c-wrt
+  REPO_URL: https://github.com/qmk/qmk_firmware.git
+  REPO_BRANCH: master
   QMK_CONFIG: methane
   UPLOAD_BIN_DIR: true
   UPLOAD_RELEASE: false
@@ -24,7 +24,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-
+      
+    - name: Clone QMK fork
+      run: | 
+        git clone $REPO_URL -b $REPO_BRANCH ./qmk_firmware
+        
     - name: Set Up QMK
       working-directory: ./qmk_firmware
       run: |
