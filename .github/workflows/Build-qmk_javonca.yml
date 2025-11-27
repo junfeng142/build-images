@@ -12,7 +12,7 @@ on:
 env:
   REPO_URL: https://github.com/qmk/qmk_firmware.git
   REPO_BRANCH: master
-  QMK_CONFIG: methane
+  QMK_CONFIG: xinput
   UPLOAD_RELEASE: false
 
 jobs:
