@@ -236,8 +236,8 @@ report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
             }
             
             // 计算最终移动值（带加速度）
-            int8_t x_move = (x_raw * (100 + accel_x / 10)) / (100 * 8);
-            int8_t y_move = (y_raw * (100 + accel_y / 10)) / (100 * 8);
+            int8_t x_move = (x_raw * (100 + accel_x / 10)) / (100 * 32);
+            int8_t y_move = (y_raw * (100 + accel_y / 10)) / (100 * 32);
             
             // 限制最大值
             x_move = x_move > 127 ? 127 : (x_move < -127 ? -127 : x_move);
