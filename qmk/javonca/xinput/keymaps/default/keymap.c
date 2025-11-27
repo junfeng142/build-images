@@ -18,23 +18,23 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TG(1),   KC_LSFT, KC_LCTL, KC_SPC,
-        KC_U,    KC_I,    KC_T,    KC_TRNS,
-        KC_O,    KC_P,    KC_Y,    KC_TRNS,
-        KC_ESC,  KC_F,    KC_G,    KC_SCLN,
-        KC_H,    KC_J,    KC_K,    KC_L
+        TG(1), KC_9, KC_0, KC_SPC,
+        KC_1,  KC_2, KC_3, KC_4,
+        KC_5,  KC_6, KC_7, KC_8,
+        KC_U,  KC_I, KC_O, KC_P,
+        KC_J,  KC_K, KC_L, KC_SCLN
     ),
 
     [1] = LAYOUT(
-        KC_TRNS,        KC_TRNS,  KC_TRNS, MS_BTN3,
-        MS_BTN1,        MS_BTN2,  KC_ENT,  KC_TRNS,
-        LT(2, KC_PGUP), KC_PGDN,  KC_BSPC, KC_TRNS,
-        KC_TRNS,        KC_E,     KC_R,    KC_Z,
-        KC_X,           KC_C,     KC_V,    KC_B
+        KC_TRNS,        KC_LSFT,  KC_LCTL, MS_BTN3,
+        MS_BTN1,        MS_BTN2,  KC_ENT,  LCTL(KC_C),
+        LT(2, KC_PGUP), KC_PGDN,  KC_BSPC, LCTL(KC_V),
+        KC_Q,           KC_E,     KC_R,    KC_T,
+        KC_Y,           KC_F,     KC_G,    KC_H
     ),
 
     [2] = LAYOUT(
-        KC_TRNS, KC_TRNS, KC_TRNS, BL_BRTG,
+        KC_TRNS, BL_TOGG, KC_ESC,  KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, MS_WHLU, MS_WHLD, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -46,8 +46,8 @@ void keyboard_pre_init_kb(void) {
     RCC->CFGR &= ~RCC_CFGR_MCO;
 
     gpio_set_pin_output_push_pull(A15);
-    gpio_set_pin_output_push_pull(B4);
-    gpio_set_pin_output_push_pull(B15);
+    gpio_set_pin_output_push_pull(B10);
+    gpio_set_pin_output_push_pull(B11);
 
     keyboard_pre_init_user();
 }
@@ -61,22 +61,22 @@ layer_state_t layer_state_set_user(layer_state_t state) {
             cursor_mode = false;
             scrolling_mode = false;
             gpio_write_pin_high(A15);
-            gpio_write_pin_high(B4);
-            gpio_write_pin_low(B15);
+            gpio_write_pin_high(B10);
+            gpio_write_pin_low(B11);
             break;
         case 1:
             cursor_mode = true;
             scrolling_mode = false;
             gpio_write_pin_high(A15);
-            gpio_write_pin_low(B4);
-            gpio_write_pin_high(B15);
+            gpio_write_pin_low(B10);
+            gpio_write_pin_high(B11);
             break;
         case 2:
             cursor_mode = false;
             scrolling_mode = true;
             gpio_write_pin_low(A15);
-            gpio_write_pin_high(B4);
-            gpio_write_pin_high(B15);
+            gpio_write_pin_high(B10);
+            gpio_write_pin_high(B11);
             break;
     }
     return state;
@@ -114,8 +114,8 @@ void matrix_scan_user(void) {
     }
     
     // 读取ADC
-    int16_t x_val = (int16_t)analogReadPin(A1) - adc_cfg.center;
-    int16_t y_val = (int16_t)analogReadPin(A2) - adc_cfg.center;
+    int16_t x_val = (int16_t)analogReadPin(A3) - adc_cfg.center;
+    int16_t y_val = (int16_t)analogReadPin(A4) - adc_cfg.center;
     
     // 应用死区
     if (abs(x_val) < adc_cfg.deadzone) x_val = 0;
@@ -133,8 +133,8 @@ void matrix_scan_user(void) {
             js.right_debounce++;
         } else {
             if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_right) register_code(KC_UP);
-                else unregister_code(KC_UP);
+                if(new_right) register_code(KC_LEFT);
+                else unregister_code(KC_LEFT);
             }
             js.right = new_right;
             js.right_debounce = 0;
@@ -149,8 +149,8 @@ void matrix_scan_user(void) {
             js.left_debounce++;
         } else {
             if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_left) register_code(KC_DOWN);
-                else unregister_code(KC_DOWN);
+                if(new_left) register_code(KC_RIGHT);
+                else unregister_code(KC_RIGHT);
             }
             js.left = new_left;
             js.left_debounce = 0;
@@ -165,8 +165,8 @@ void matrix_scan_user(void) {
             js.up_debounce++;
         } else {
             if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_up) register_code(KC_LEFT);
-                else unregister_code(KC_LEFT);
+                if(new_up) register_code(KC_UP);
+                else unregister_code(KC_UP);
             }
             js.up = new_up;
             js.up_debounce = 0;
@@ -181,8 +181,8 @@ void matrix_scan_user(void) {
             js.down_debounce++;
         } else {
             if ((!cursor_mode) && (!scrolling_mode)) {
-                if (new_down) register_code(KC_RIGHT);
-                else unregister_code(KC_RIGHT);
+                if (new_down) register_code(KC_DOWN);
+                else unregister_code(KC_DOWN);
             }
             js.down = new_down;
             js.down_debounce = 0;
@@ -193,7 +193,6 @@ void matrix_scan_user(void) {
     
     last_scan = timer_read32();
 }
-
 
 bool pointing_device_driver_init(void) { 
     return true; 
@@ -209,7 +208,7 @@ void pointing_device_driver_set_cpi(uint16_t cpi) {
 
 static uint16_t accel_x = 0, accel_y = 0;
 report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
-    static uint32_t last_mouse_update = 0;
+    
     
     if (timer_elapsed32(last_mouse_update) > 10) { // 10ms更新
         // 读取摇杆值
@@ -246,10 +245,10 @@ report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
             // 特定层才更新鼠标
             if (cursor_mode | scrolling_mode) {
                 if (cursor_mode) {
-                    mouse_report.x = y_move;
-                    mouse_report.y = - x_move;
+                    mouse_report.x = - x_move;
+                    mouse_report.y = y_move;
                 } else if (scrolling_mode) {
-                    mouse_report.x = x_move;
+                    mouse_report.x = - x_move;
                     mouse_report.y = y_move;
                 }
                 
