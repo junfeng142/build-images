@@ -18,23 +18,23 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TG(1),   KC_LSFT, KC_BSPC, KC_SPC,
+        TG(1),   KC_LSFT, KC_LCTL, KC_SPC,
         KC_U,    KC_I,    KC_T,    KC_TRNS,
         KC_O,    KC_P,    KC_Y,    KC_TRNS,
-        KC_ENT,  KC_F,    KC_G,    KC_SCLN,
+        KC_ESC,  KC_F,    KC_G,    KC_SCLN,
         KC_H,    KC_J,    KC_K,    KC_L
     ),
 
     [1] = LAYOUT(
-        KC_TRNS,        KC_TRNS,  KC_ESC,     MS_BTN3,
-        MS_BTN1,        MS_BTN2,  LCTL(KC_C), KC_TRNS,
-        LT(2, KC_PGUP), KC_PGDN,  LCTL(KC_V), KC_TRNS,
-        KC_TRNS,        KC_E,     KC_R,       KC_Z,
-        KC_X,           KC_C,     KC_V,       KC_B
+        KC_TRNS,        KC_TRNS,  KC_TRNS, MS_BTN3,
+        MS_BTN1,        MS_BTN2,  KC_ENT,  KC_TRNS,
+        LT(2, KC_PGUP), KC_PGDN,  KC_BSPC, KC_TRNS,
+        KC_TRNS,        KC_E,     KC_R,    KC_Z,
+        KC_X,           KC_C,     KC_V,    KC_B
     ),
 
     [2] = LAYOUT(
-        KC_TRNS, BL_BRTG, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, BL_BRTG,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, MS_WHLU, MS_WHLD, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -194,6 +194,7 @@ void matrix_scan_user(void) {
     last_scan = timer_read32();
 }
 
+
 bool pointing_device_driver_init(void) { 
     return true; 
 }
@@ -206,28 +207,58 @@ void pointing_device_driver_set_cpi(uint16_t cpi) {
 
 }
 
+static uint16_t accel_x = 0, accel_y = 0;
 report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
-    // 读取摇杆轴值 (-127 到 127)
-    int8_t x_axis = (int8_t) ((analogReadPin(A1) - adc_cfg.center) / 8);  // X轴
-    int8_t y_axis = (int8_t) ((analogReadPin(A2) - adc_cfg.center) / 8);  // Y轴
+    static uint32_t last_mouse_update = 0;
     
-    // 应用死区过滤
-    const int8_t deadzone = 10;
-    if (abs(x_axis) < deadzone) x_axis = 0;
-    if (abs(y_axis) < deadzone) y_axis = 0;
-    
-    // 特定层才更新鼠标
-    if (cursor_mode | scrolling_mode) {
-        if (cursor_mode) {
-            mouse_report.x = y_axis / 16;
-            mouse_report.y = - x_axis / 16;
-        } else if (scrolling_mode) {
-            mouse_report.x = x_axis / 16;
-            mouse_report.y = y_axis / 16;
+    if (timer_elapsed32(last_mouse_update) > 10) { // 10ms更新
+        // 读取摇杆值
+        int8_t x_raw = (int8_t) ((analogReadPin(A1) - adc_cfg.center) / 8);  // X轴
+        int8_t y_raw = (int8_t) ((analogReadPin(A2) - adc_cfg.center) / 8);  // Y轴
+        
+        // 死区过滤
+        const int16_t deadzone = 10;
+        if (abs(x_raw) < deadzone) x_raw = 0;
+        if (abs(y_raw) < deadzone) y_raw = 0;
+        
+        if (x_raw != 0 || y_raw != 0) {
+            // 应用加速度
+            if (x_raw != 0) {
+                accel_x = (accel_x + abs(x_raw)) > 1000 ? 1000 : accel_x + abs(x_raw);
+            } else {
+                accel_x = 0;
+            }
+            
+            if (y_raw != 0) {
+                accel_y = (accel_y + abs(y_raw)) > 1000 ? 1000 : accel_y + abs(y_raw);
+            } else {
+                accel_y = 0;
+            }
+            
+            // 计算最终移动值（带加速度）
+            int8_t x_move = (x_raw * (100 + accel_x / 10)) / (100 * 8);
+            int8_t y_move = (y_raw * (100 + accel_y / 10)) / (100 * 8);
+            
+            // 限制最大值
+            x_move = x_move > 127 ? 127 : (x_move < -127 ? -127 : x_move);
+            y_move = y_move > 127 ? 127 : (y_move < -127 ? -127 : y_move);
+            
+            // 特定层才更新鼠标
+            if (cursor_mode | scrolling_mode) {
+                if (cursor_mode) {
+                    mouse_report.x = y_move;
+                    mouse_report.y = - x_move;
+                } else if (scrolling_mode) {
+                    mouse_report.x = x_move;
+                    mouse_report.y = y_move;
+                }
+                
+                pointing_device_set_report(mouse_report);
+                pointing_device_send();
+            }
         }
         
-        pointing_device_set_report(mouse_report);
-        pointing_device_send();
+        last_mouse_update = timer_read32();
     }
 
     return mouse_report;
