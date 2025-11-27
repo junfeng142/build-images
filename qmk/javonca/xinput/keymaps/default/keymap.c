@@ -217,7 +217,7 @@ report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
         int8_t y_raw = (int8_t) ((analogReadPin(A2) - adc_cfg.center) / 8);  // Y轴
         
         // 死区过滤
-        const int16_t deadzone = 5;
+        const int16_t deadzone = 2;
         if (abs(x_raw) < deadzone) x_raw = 0;
         if (abs(y_raw) < deadzone) y_raw = 0;
         
