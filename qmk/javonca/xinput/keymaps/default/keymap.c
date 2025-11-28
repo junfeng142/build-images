@@ -18,68 +18,108 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        TG(1), KC_9, KC_0, KC_SPC,
-        KC_1,  KC_2, KC_3, KC_4,
-        KC_5,  KC_6, KC_7, KC_8,
-        KC_U,  KC_I, KC_O, KC_P,
-        KC_J,  KC_K, KC_L, KC_SCLN
+        TG(1), KC_LSFT, KC_LCTL, KC_SPC,
+        KC_U,  KC_I,    KC_T,    KC_TRNS,
+        KC_O,  KC_P,    KC_Y,    KC_TRNS,
+        TG(3), KC_F,    KC_G,    KC_SCLN,
+        KC_H,  KC_J,    KC_K,    KC_L
     ),
 
     [1] = LAYOUT(
-        KC_TRNS,        KC_LSFT,  KC_LCTL, MS_BTN3,
-        MS_BTN1,        MS_BTN2,  KC_ENT,  LCTL(KC_C),
-        LT(2, KC_PGUP), KC_PGDN,  KC_BSPC, LCTL(KC_V),
-        KC_Q,           KC_E,     KC_R,    KC_T,
-        KC_Y,           KC_F,     KC_G,    KC_H
+        KC_TRNS,        KC_TRNS,  KC_TRNS, MS_BTN3,
+        MS_BTN1,        MS_BTN2,  KC_ENT,  KC_TRNS,
+        LT(2, KC_PGUP), KC_PGDN,  KC_BSPC, KC_TRNS,
+        KC_TRNS,        KC_E,     KC_R,    KC_Z,
+        KC_X,           KC_C,     KC_V,    KC_B
     ),
 
     [2] = LAYOUT(
-        KC_TRNS, BL_TOGG, KC_ESC,  KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, BL_BRTG,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, MS_WHLU, MS_WHLD, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),
+
+    [3] = LAYOUT(
+        KC_ESC,  JS_8,  JS_9,  JS_6,
+        JS_0,    JS_1,  JS_4,  KC_TRNS,
+        JS_2,    JS_3,  JS_5,  KC_TRNS,
+        KC_TRNS, JS_10, JS_11, JS_7,
+        JS_12,   JS_13, JS_14, JS_15
     )
+};
+
+joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
+    JOYSTICK_AXIS_VIRTUAL,
+    JOYSTICK_AXIS_VIRTUAL,
+    JOYSTICK_AXIS_VIRTUAL,
+    JOYSTICK_AXIS_VIRTUAL
 };
 
 void keyboard_pre_init_kb(void) {
     RCC->CFGR &= ~RCC_CFGR_MCO;
 
     gpio_set_pin_output_push_pull(A15);
-    gpio_set_pin_output_push_pull(B10);
-    gpio_set_pin_output_push_pull(B11);
+    gpio_set_pin_output_push_pull(B4);
+    gpio_set_pin_output_push_pull(B15);
 
     keyboard_pre_init_user();
 }
 
 bool cursor_mode = false;
 bool scrolling_mode = false;
+bool joystick_mode = false;
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     switch (get_highest_layer(state)) {
         case 0:
             cursor_mode = false;
             scrolling_mode = false;
+            joystick_mode = false;
             gpio_write_pin_high(A15);
-            gpio_write_pin_high(B10);
-            gpio_write_pin_low(B11);
+            gpio_write_pin_high(B4);
+            gpio_write_pin_low(B15);
             break;
         case 1:
             cursor_mode = true;
             scrolling_mode = false;
+            joystick_mode = false;
             gpio_write_pin_high(A15);
-            gpio_write_pin_low(B10);
-            gpio_write_pin_high(B11);
+            gpio_write_pin_low(B4);
+            gpio_write_pin_high(B15);
             break;
         case 2:
             cursor_mode = false;
             scrolling_mode = true;
+            joystick_mode = false;
             gpio_write_pin_low(A15);
-            gpio_write_pin_high(B10);
-            gpio_write_pin_high(B11);
+            gpio_write_pin_low(B4);
+            gpio_write_pin_high(B15);
+            break;
+
+        case 3:
+            cursor_mode = false;
+            scrolling_mode = false;
+            joystick_mode = true;
+            gpio_write_pin_low(A15);
+            gpio_write_pin_high(B4);
+            gpio_write_pin_low(B15);
             break;
     }
     return state;
+}
+
+int16_t read_calibrated_axis(uint32_t pin) {
+    uint16_t adc_value = analogReadPin(pin);
+    
+    int16_t relative_value = (int16_t)adc_value - 512;
+    
+    if (abs(relative_value) < 5) {
+        return 0;
+    }
+    
+    return relative_value;
 }
 
 // 配置参数
@@ -107,15 +147,14 @@ static joystick_state_t js = {0};
 
 void matrix_scan_user(void) {
     static uint32_t last_scan = 0;
-    const uint16_t scan_interval = 10; // 10ms扫描间隔
 
-    if (timer_elapsed32(last_scan) < scan_interval) {
+    if (timer_elapsed32(last_scan) < 10) {
         return;
     }
     
     // 读取ADC
-    int16_t x_val = (int16_t)analogReadPin(A3) - adc_cfg.center;
-    int16_t y_val = (int16_t)analogReadPin(A4) - adc_cfg.center;
+    int16_t x_val = (int16_t)analogReadPin(A1) - adc_cfg.center;
+    int16_t y_val = (int16_t)analogReadPin(A2) - adc_cfg.center;
     
     // 应用死区
     if (abs(x_val) < adc_cfg.deadzone) x_val = 0;
@@ -132,9 +171,9 @@ void matrix_scan_user(void) {
         if (js.right_debounce < adc_cfg.debounce) {
             js.right_debounce++;
         } else {
-            if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_right) register_code(KC_LEFT);
-                else unregister_code(KC_LEFT);
+            if ((!cursor_mode) && (!scrolling_mode) && (!joystick_mode)) {
+                if(new_right) register_code(KC_UP);
+                else unregister_code(KC_UP);
             }
             js.right = new_right;
             js.right_debounce = 0;
@@ -148,9 +187,9 @@ void matrix_scan_user(void) {
         if (js.left_debounce < adc_cfg.debounce) {
             js.left_debounce++;
         } else {
-            if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_left) register_code(KC_RIGHT);
-                else unregister_code(KC_RIGHT);
+            if ((!cursor_mode) && (!scrolling_mode) && (!joystick_mode)) {
+                if(new_left) register_code(KC_DOWN);
+                else unregister_code(KC_DOWN);
             }
             js.left = new_left;
             js.left_debounce = 0;
@@ -164,9 +203,9 @@ void matrix_scan_user(void) {
         if (js.up_debounce < adc_cfg.debounce) {
             js.up_debounce++;
         } else {
-            if ((!cursor_mode) && (!scrolling_mode)) {
-                if(new_up) register_code(KC_UP);
-                else unregister_code(KC_UP);
+            if ((!cursor_mode) && (!scrolling_mode) && (!joystick_mode)) {
+                if(new_up) register_code(KC_LEFT);
+                else unregister_code(KC_LEFT);
             }
             js.up = new_up;
             js.up_debounce = 0;
@@ -180,9 +219,9 @@ void matrix_scan_user(void) {
         if (js.down_debounce < adc_cfg.debounce) {
             js.down_debounce++;
         } else {
-            if ((!cursor_mode) && (!scrolling_mode)) {
-                if (new_down) register_code(KC_DOWN);
-                else unregister_code(KC_DOWN);
+            if ((!cursor_mode) && (!scrolling_mode) && (!joystick_mode)) {
+                if (new_down) register_code(KC_RIGHT);
+                else unregister_code(KC_RIGHT);
             }
             js.down = new_down;
             js.down_debounce = 0;
@@ -190,9 +229,20 @@ void matrix_scan_user(void) {
     } else {
         js.down_debounce = 0;
     }
+
+    if (joystick_mode) {
+        // 读取校准后的轴数据
+        int16_t x_axis = read_calibrated_axis(A1);
+        int16_t y_axis = read_calibrated_axis(A2);
+        
+        // 设置摇杆数据
+        joystick_set_axis(0, y_axis);
+        joystick_set_axis(1, (- x_axis));
+    }
     
     last_scan = timer_read32();
 }
+
 
 bool pointing_device_driver_init(void) { 
     return true; 
@@ -208,7 +258,7 @@ void pointing_device_driver_set_cpi(uint16_t cpi) {
 
 static uint16_t accel_x = 0, accel_y = 0;
 report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
-    
+    static uint32_t last_mouse_update = 0;
     
     if (timer_elapsed32(last_mouse_update) > 10) { // 10ms更新
         // 读取摇杆值
@@ -245,10 +295,10 @@ report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) {
             // 特定层才更新鼠标
             if (cursor_mode | scrolling_mode) {
                 if (cursor_mode) {
-                    mouse_report.x = - x_move;
-                    mouse_report.y = y_move;
+                    mouse_report.x = y_move;
+                    mouse_report.y = - x_move;
                 } else if (scrolling_mode) {
-                    mouse_report.x = - x_move;
+                    mouse_report.x = x_move;
                     mouse_report.y = y_move;
                 }
                 
