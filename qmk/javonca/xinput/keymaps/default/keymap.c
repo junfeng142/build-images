@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [3] = LAYOUT(
-        KC_ESC,  JS_8,  JS_9,  JS_6,
+        KC_TRNS, JS_8,  JS_9,  JS_6,
         JS_0,    JS_1,  JS_4,  KC_TRNS,
         JS_2,    JS_3,  JS_5,  KC_TRNS,
         KC_TRNS, JS_10, JS_11, JS_7,
