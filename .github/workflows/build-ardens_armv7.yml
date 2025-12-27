@@ -28,11 +28,7 @@ jobs:
       working-directory: libretro-super
       run: |
         git submodule update --init --recursive
-        ./libretro-build.sh fetch
-
-    - name: Check space usage
-      if: (!cancelled())
-      run: df -hT
+        ./libretro-super.sh fetch
 
     - name: Configure build for armv7
       working-directory: libretro-super
