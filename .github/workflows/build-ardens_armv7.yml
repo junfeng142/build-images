@@ -47,5 +47,5 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: lr-ardens-armhf
+        name: ardens-armhf
         path: out/
