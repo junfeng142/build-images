@@ -34,7 +34,7 @@ jobs:
       run: |
         # build only the ardens core to save time
         # NOTE: libretro-super uses many build scripts; this attempts a minimal single-core build
-        ./libretro-build.sh ardens armv7-neon-hardfloat-linux-gnueabihf
+        ./libretro-build.sh gpsp armv7
 
     - name: Collect built core
       run: |
