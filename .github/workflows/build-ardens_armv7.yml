@@ -35,7 +35,7 @@ jobs:
       run: |
         # build only the ardens core to save time
         # NOTE: libretro-super uses many build scripts; this attempts a minimal single-core build
-        make -C libretro-super -j${NUMJOBS} PLATFORM=linux TARGET=armhf CORES="ardens"
+        make -j${NUMJOBS} PLATFORM=linux TARGET=armhf CORES="ardens"
 
     - name: Collect built core
       run: |
