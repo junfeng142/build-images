@@ -28,14 +28,14 @@ jobs:
       working-directory: libretro-super
       run: |
         git submodule update --init --recursive
-        ./libretro-fetch.sh gpsp
+        ./libretro-fetch.sh ardens
 
     - name: Configure build for armv7
       working-directory: libretro-super
       run: |
         # build only the ardens core to save time
         # NOTE: libretro-super uses many build scripts; this attempts a minimal single-core build
-        ./libretro-build.sh gpsp PLATFORM=linux TARGET=armhf
+        ./libretro-build.sh ardens
 
     - name: Collect built core
       run: |
