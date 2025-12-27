@@ -1,0 +1,52 @@
+name: Build lr-ardens (armv7)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-armv7:
+    runs-on: ubuntu-latest
+    env:
+      NUMJOBS: 4
+
+    steps:
+    - name: Checkout libretro-super
+      uses: actions/checkout@v4
+      with:
+        repository: libretro/libretro-super
+        path: libretro-super
+
+    - name: Install packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential git python3 python3-pip cmake pkg-config \
+          libasound2-dev libudev-dev libx11-dev libxrandr-dev libgl1-mesa-dev \
+          gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+
+    - name: Fetch submodules and update
+      working-directory: libretro-super
+      run: |
+        git submodule update --init --recursive
+        ./libretro-builds.sh fetch
+
+    - name: Configure build for armv7
+      working-directory: libretro-super
+      run: |
+        # build only the ardens core to save time
+        # NOTE: libretro-super uses many build scripts; this attempts a minimal single-core build
+        make -C libretro-super -j${NUMJOBS} PLATFORM=linux TARGET=armhf CORES="ardens"
+
+    - name: Collect built core
+      run: |
+        mkdir -p out
+        # typical libretro-super install path
+        cp -v libretro-super/dist/cores/armhf/*.so out/ || true
+        ls -lah out || true
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: lr-ardens-armhf
+        path: out/
