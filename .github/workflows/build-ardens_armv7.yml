@@ -33,7 +33,7 @@ jobs:
       working-directory: libretro-super
       run: |
         git submodule update --init --recursive
-        ./libretro-builds.sh fetch
+        ./libretro-build.sh fetch
 
     - name: Configure build for armv7
       working-directory: libretro-super
