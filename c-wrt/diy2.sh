@@ -21,7 +21,7 @@ find feeds/packages/net/natmap -name index.html -exec rm {} \;
 
 # fix golang version
 rm -rf feeds/packages/lang/golang
-git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang -b 1.25 feeds/packages/lang/golang
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.1.4/g' package/base-files/files/bin/config_generate
