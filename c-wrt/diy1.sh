@@ -26,7 +26,7 @@ git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/pas
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 
 # clone clash
-git clone https://github.com/vernesong/OpenClash.git package/OpenClash
+git clone --depth 1 https://github.com/vernesong/OpenClash.git package/OpenClash
 
 # clone cups
 #git clone https://github.com/sirpdboy/luci-app-cupsd.git package/cups
