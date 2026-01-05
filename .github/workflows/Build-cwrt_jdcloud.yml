@@ -82,6 +82,7 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
+        cd package/OpenClash/luci-app-openclash/po && ln -s zh-cn zh_Hans
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
