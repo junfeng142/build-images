@@ -12,10 +12,12 @@
 # fix immortalwrt passwall2
 rm -rf ../feeds/packages/net/{chinadns*,hysteria,geoview,trojan*,xray*,v2ray*,sing*}
 
-# fix natmap version
+# fix natmap/rust version
 rm -rf feeds/packages/net/natmap
 wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap/
+wget -r --no-parent https://cdn.jsdelivr.net/gh/immortalwrt/packages@master/lang/rust/
 cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages/net/natmap/
+cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/lang/rust feeds/packages/lang/rust/
 rm -rf cdn.jsdelivr.net
 find feeds/packages/net/natmap -name index.html -exec rm {} \;
 
