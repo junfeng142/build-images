@@ -20,6 +20,7 @@ cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/net/natmap feeds/packages
 cp -rf cdn.jsdelivr.net/gh/immortalwrt/packages@master/lang/rust feeds/packages/lang/rust/
 rm -rf cdn.jsdelivr.net
 find feeds/packages/net/natmap -name index.html -exec rm {} \;
+find feeds/packages/lang/rust -name index.html -exec rm {} \;
 
 # fix golang version
 rm -rf feeds/packages/lang/golang
